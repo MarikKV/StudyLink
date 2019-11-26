@@ -21,7 +21,7 @@ class App extends Component {
         this.updateData = this.updateData.bind(this)
         this.updateLoged = this.updateLoged.bind(this)
 
-    }  
+    }
     componentDidMount(){
         if(this.props.username !== null){
         this.setState({ 
