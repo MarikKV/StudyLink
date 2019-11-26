@@ -11,13 +11,13 @@ class Landing extends Component {
         }
         
     }
-    componentDidMount() {
-       
+    componentDidMount(){
+        
     }
     render() {
         return ( 
            <div>
-               <img src={program}/>
+               <img src={program} alt='program'/>
            </div>
         );
     }

@@ -4,30 +4,59 @@ import Nav from "react-bootstrap/Nav";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Header extends Component {
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props)
         this.state = {
-            login: null
+            loged: this.props.loged,
+            username: this.props.username
+        }
+
+        this.onlogOut = this.onlogOut.bind(this)
+    }
+    componentDidMount(){
+        if(this.props.username !== null){
+            this.setState({loged: true})
         }
     }
+    onlogOut(){
+        this.props.updateLoged(false)
+        window.location.href = '#/Landing';
+        localStorage.removeItem('studyLinkuser');
+    }
     render() {
+        let menuUser, links;
+        if(this.props.loged){
+            menuUser = (
+                <Nav>
+                    <Nav.Link>Увійдено як {this.props.username}</Nav.Link>
+                    <Nav.Link onClick={this.onlogOut}>Вийти</Nav.Link>
+                </Nav>
+                )
+            links = (
+                <Nav>        
+                    <Nav.Link href="#/home">Головна</Nav.Link>
+                        <Nav.Link href="#/temes">Навчання</Nav.Link>
+                    <Nav.Link href="#/howtopay">Як оплатити?</Nav.Link>
+                </Nav>
+            )
+            
+        }
+        if(!this.props.loged){
+            menuUser = (
+                <Nav>
+                    <Nav.Link href="#/SignIn">Увійти</Nav.Link>
+                </Nav>
+            )
+        }
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Navbar.Brand href="#/landing">StudyLink</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#/home">Головна</Nav.Link>
-                        <Nav.Link href="#/temes">Навання</Nav.Link>
+                        {links}
                     </Nav>
-                    {console.log(this.props)}
-
-                    {(this.props !== 'false') ? <Nav>
-                        <Nav.Link href="#/SignIn">Увійти</Nav.Link>
-                    </Nav> : <Nav>
-                        <Nav.Link href="#/SignIn">Вийти</Nav.Link>
-                    </Nav>}
-                    
+                    {menuUser}    
                 </Navbar.Collapse>
             </Navbar>
         );

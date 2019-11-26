@@ -15,8 +15,25 @@ const firebaseConfig = {
   };
 
   firebase.initializeApp(firebaseConfig);
-
-ReactDOM.render(<App />, document.getElementById('root'));
+  let user;
+  if(localStorage.getItem('studyLinkuser') !== null){
+    user = JSON.parse(localStorage.getItem('studyLinkuser'));
+  }
+  if(localStorage.getItem('studyLinkuser') == null){
+    user = {
+      name: null,
+      school: null,
+      group: null,
+      phone: null,
+      debt: null
+  }
+}
+ReactDOM.render(<App 
+  username={user.name}
+  userschool={user.school} 
+  usergroup={user.group} 
+  userphone={user.phone} 
+  userdebt={user.debt}/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -105,6 +105,7 @@ class SignIn extends Component {
                                     this.setState({
                                         signOut: true
                                     })
+                                    this.props.updateData(item.name)
                                 }else{
                                     this.setState({
                                         login: false

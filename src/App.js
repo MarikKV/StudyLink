@@ -1,20 +1,48 @@
 import React, {Component} from 'react';
 import { HashRouter, Route} from "react-router-dom";
-import HeaderContainer from './components/HeaderContainer';
+import Header from './components/Header';
 import Home from './components/Home';
 import Admin from './components/Admin';
 import SignIn from './components/SignIn';
 import Landing from './components/Landing';
 import Temes from './components/Temes';
+import HowToPay from './components/HowToPay';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: this.props.username,
+            loged: false
+        }
+        this.updateData = this.updateData.bind(this)
+        this.updateLoged = this.updateLoged.bind(this)
+
+    }  
+    componentDidMount(){
+        if(this.props.username !== null){
+        this.setState({ 
+            loged: true,
+            username: this.props.username,
+            userschool: this.props.userschool,
+            usergroup: this.props.usergroup,
+         })
+        }
+    }
+    updateData = (value) => {
+        this.setState({ username: value, loged: true});
+    }
+    updateLoged = (value) => {
+        this.setState({ loged: value});
+    }
     render() {
         return (
             <HashRouter basename='/'>
               <div className="App" align='center'>
-                  <Route path='/' component={HeaderContainer}/>
+                  <Route path='/'  render={() => (<Header  username={this.state.username} loged={this.state.loged} updateLoged={this.updateLoged}/>)}/>
 
                   <Route exact path='/' component={Landing}/>
 
@@ -24,9 +52,11 @@ class App extends Component {
 
                   <Route exact path='/temes' component={Temes}/>
 
+                  <Route exact path='/howtopay' component={HowToPay}/>
+
                   <Route exact path='/admin' component={Admin}/>
 
-                  <Route path='/SignIn' component={SignIn}/>
+                  <Route path='/SignIn' render={() => (<SignIn updateData={this.updateData}/>)}/>
               </div>
           </HashRouter>
         );

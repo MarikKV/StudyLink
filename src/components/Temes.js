@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Accordion from 'react-bootstrap/Accordion';
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
+import '../componentsStyle/LoaderStyle.css';
 
 import * as firebase from 'firebase';
 
@@ -20,20 +21,18 @@ class Temes extends Component {
         const temesRef = rootRef.child('temes');
         const schoolRef = rootRef.child('schools');
         let user = JSON.parse(localStorage.getItem('studyLinkuser'));
-        console.log(user)
-        let dbinfo, dbinfoSchools;
+        //console.log(user)
+        let dbinfo, dbinfoSchools, temes_pass;
         
         schoolRef.on('value', snap =>{
             dbinfoSchools = snap.val();
-            //console.log(dbinfoSchools);
             dbinfoSchools.map(item=>{
                 if(item.school === user.school){
-                    //console.log(item.school)
                     item.groups.map(item=>{
                         if(item.name === user.group){
-                            //console.log(item.name, item.temes_pass, item.temes_open)
+                            temes_pass = item.temes_pass
                             this.setState({
-                                temesOpen: item.temes_open
+                                temesOpen: item.temes_pass
                             })
                         }
                     })
@@ -42,14 +41,16 @@ class Temes extends Component {
         })
         temesRef.on('value', snap =>{
             dbinfo = snap.val();
-            console.log(dbinfo.length, dbinfo)
-            while(dbinfo.length>this.state.temesOpen){
-                dbinfo.pop();
+            if(!this.state.loaded){
+                while(dbinfo.length > temes_pass){
+                    dbinfo.pop();
+                    //console.log(dbinfo, temes_pass)
+                }
+                this.setState({
+                    temes: dbinfo
+                })
             }
-            console.log(dbinfo.length, dbinfo)
-
             this.setState({
-                temes: dbinfo,
                 username: user.name,
                 loaded: true
             })
@@ -57,9 +58,9 @@ class Temes extends Component {
     }
     render() {
         if(!this.state.loaded){
-            return <div>Loading...</div>
+            return <div className="lds-facebook"><div></div><div></div><div></div></div>
         }
-        if(this.state.loaded){
+        else{
             return (
                 <div>
                     <h1>Теми відкриті для {this.state.username}</h1>
