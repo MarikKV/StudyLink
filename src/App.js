@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { HashRouter, Route} from "react-router-dom";
 import Header from './components/Header';
 import Home from './components/Home';
+import HomeTeacher from './components/HomeTeacher';
 import Admin from './components/Admin';
 import SignIn from './components/SignIn';
 import Landing from './components/Landing';
@@ -42,13 +43,20 @@ class App extends Component {
         return (
             <HashRouter basename='/'>
               <div className="App" align='center'>
-                  <Route path='/'  render={() => (<Header  username={this.state.username} loged={this.state.loged} updateLoged={this.updateLoged}/>)}/>
+                  <Route path='/'  render={() => (<Header
+                    username={this.state.username} 
+                    loged={this.state.loged} 
+                    updateLoged={this.updateLoged}
+                    usergroup={this.props.usergroup}/>)
+                  }/>
 
                   <Route exact path='/' component={Landing}/>
 
                   <Route exact path='/landing' component={Landing}/>
 
                   <Route exact path='/home' component={Home}/>
+
+                  <Route exact path='/homeTeacher' component={HomeTeacher}/>
 
                   <Route exact path='/temes' component={Temes}/>
 

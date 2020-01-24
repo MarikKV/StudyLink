@@ -1,9 +1,11 @@
 .width-250{
     width: 250px;
 }
+.width-150{
+    width: 150px;
+}
 .width-100{
     width: 100px;
-    color: red;
 }
 .width-50{
     width: 50px;
@@ -13,6 +15,12 @@
 }
 .gray{
     color: gray;
+}
+.green{
+    color: green;
+}
+.red{
+    color: red;
 }
 .ff-c{
     font-family: cursive;

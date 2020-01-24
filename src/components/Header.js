@@ -25,7 +25,7 @@ class Header extends Component {
     }
     render() {
         let menuUser, links;
-        if(this.props.loged){
+        if(this.props.loged && this.props.usergroup !== null){
             menuUser = (
                 <Nav>
                     <Nav.Link>Увійдено як {this.props.username}</Nav.Link>
@@ -35,11 +35,25 @@ class Header extends Component {
             links = (
                 <Nav>        
                     <Nav.Link href="#/home">Головна</Nav.Link>
-                        <Nav.Link href="#/temes">Навчання</Nav.Link>
+                    <Nav.Link href="#/temes">Навчання</Nav.Link>
                     <Nav.Link href="#/howtopay">Як оплатити?</Nav.Link>
                 </Nav>
             )
             
+        }
+        if(this.props.loged && this.props.usergroup === null){
+            menuUser = (
+                <Nav>
+                    <Nav.Link>Увійдено як {this.props.username}</Nav.Link>
+                    <Nav.Link onClick={this.onlogOut}>Вийти</Nav.Link>
+                </Nav>
+                )
+            links = (
+                <Nav>        
+                    <Nav.Link href="#/homeTeacher">Мої групи</Nav.Link>
+                    <Nav.Link href="#/temes">Навчання</Nav.Link>
+                </Nav>
+            )
         }
         if(!this.props.loged){
             menuUser = (
@@ -50,6 +64,7 @@ class Header extends Component {
         }
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                {console.log(this.props)}
             <Navbar.Brand href="#/landing">StudyLink</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
