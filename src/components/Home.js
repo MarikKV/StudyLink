@@ -107,7 +107,7 @@ class Home extends Component {
                     <div align='center' className='allGroups'>
                         { this.state.allTemsPased.map(item=>(
                             <div key={item.name} className='groups'>
-                                У групі {item.name} відбулось: {item.temes_pass} занять
+                                У групі {item.name} відбулось: {item.temes_pass} занять.
                             </div>
                             ))
                         }
