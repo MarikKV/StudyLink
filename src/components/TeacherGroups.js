@@ -183,7 +183,6 @@ class TeacherGroups extends Component {
                 this.setState({
                     schoolsInfo: dbinfo
                 })
-                console.log('del presed !!!!!!!!!!!!!!!')
             })
             
             
