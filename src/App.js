@@ -3,6 +3,7 @@ import { HashRouter, Route} from "react-router-dom";
 import Header from './components/Header';
 import Home from './components/Home';
 import HomeTeacher from './components/HomeTeacher';
+import TeacherGroups from './components/TeacherGroups';
 import Admin from './components/Admin';
 import SignIn from './components/SignIn';
 import Landing from './components/Landing';
@@ -57,6 +58,8 @@ class App extends Component {
                   <Route exact path='/home' component={Home}/>
 
                   <Route exact path='/homeTeacher' component={HomeTeacher}/>
+
+                  <Route exact path='/TeacherGroups' component={TeacherGroups}/>
 
                   <Route exact path='/temes' component={Temes}/>
 

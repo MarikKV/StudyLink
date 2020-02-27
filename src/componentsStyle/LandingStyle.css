@@ -1,0 +1,50 @@
+.logo{
+    color: green;
+    font-size: 600%;
+}
+.float_left{
+    float: left;
+}
+.Block0, .Block1{
+    height: 600px;
+}
+.Block1{
+    background-color: rgb(229, 236, 236);
+}
+.bg1{
+    background-color: rgb(141, 140, 138);
+    height: 300px;
+    font-size: 30px;
+    color: white;
+    font-family: fantasy;
+}
+.bg2{
+    background-color: rgb(62, 156, 33);
+    height: 300px;
+    font-size: 30px;
+    color: white;
+    font-family: fantasy;
+}
+.bg3{
+    font-size: 40px;
+    font-family: fantasy;
+}
+.bg4{
+    font-size: 40px;
+    font-family: fantasy;
+    background-color: rgb(72, 62, 78);
+    height: 240px;
+    color: white;
+}
+.html{
+    color:  rgb(175, 67, 18);
+}
+.css{
+    color:  rgb(80, 78, 161);
+}
+.js{
+    color:  rgb(207, 255, 35);
+}
+.git{
+    color:  rgb(43, 16, 25);
+}
