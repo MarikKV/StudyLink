@@ -8,6 +8,7 @@
 .Block0, .Block1{
     height: 600px;
 }
+
 .Block1{
     background-color: rgb(229, 236, 236);
 }
@@ -35,6 +36,22 @@
     background-color: rgb(72, 62, 78);
     height: 240px;
     color: white;
+}
+@media (max-width: 1245px) {
+    .bg1, .bg2{
+        height: 400px;
+    }
+}
+@media (max-width: 600px) {
+    .bg1, .bg2{
+        height: 600px;
+    }
+    .bg4{
+        height: 400px;
+    }
+    .w-50{
+        width: 500px;
+    }
 }
 .html{
     color:  rgb(175, 67, 18);

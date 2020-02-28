@@ -64,7 +64,7 @@ class Landing extends Component {
                         </div>
                     </ReactWOW>
                 </div>
-               <img src={program} alt='program'/>
+               <img src={program} alt='program' width='100%'/>
            </div>
         );
     }

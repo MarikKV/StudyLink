@@ -51,6 +51,7 @@ class Header extends Component {
             links = (
                 <Nav>        
                     <Nav.Link href="#/homeTeacher">Мої групи</Nav.Link>
+                    <Nav.Link href="#/TeacherGroups">Додати/Видалити учня</Nav.Link>
                     <Nav.Link href="#/temes">Навчання</Nav.Link>
                 </Nav>
             )
