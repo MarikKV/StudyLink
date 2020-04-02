@@ -1,0 +1,12 @@
+
+.animation1{
+	animation-duration: 1.5s;
+	animation-name: animation;
+	animation-iteration-count:infinite;
+}
+@keyframes animation{
+    0%{color:white}
+    40%{color: green}
+    80%{color:red}
+    100%{color:white}
+}

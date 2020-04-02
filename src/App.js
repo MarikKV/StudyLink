@@ -9,6 +9,7 @@ import SignIn from './components/SignIn';
 import Landing from './components/Landing';
 import Temes from './components/Temes';
 import HowToPay from './components/HowToPay';
+import Stream from './components/Stream';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -64,6 +65,8 @@ class App extends Component {
                   <Route exact path='/temes' component={Temes}/>
 
                   <Route exact path='/howtopay' component={HowToPay}/>
+
+                  <Route exact path='/stream' component={Stream}/>
 
                   <Route exact path='/admin' component={Admin}/>
 

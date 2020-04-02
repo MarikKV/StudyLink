@@ -10,25 +10,37 @@ class Landing extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            login: null
+            login: null,
+            loaded: false
         }
         
     }
     componentDidMount(){
-        
+        setTimeout(()=>{
+            this.setState({
+                loaded: true
+            })
+        }, 2000)
     }
     render() {
-        return ( 
-           <div>
-               <div className="Block0">
-                    <br/><br/><br/><br/><br/>
+        if(!this.state.loaded){
+            return <div className="loading"> 
                     <ReactWOW animation='bounceInLeft' duration="2s">
                         <h1 className='logo'>Study Link</h1>
                     </ReactWOW>
                     <br/><br/>
                     <ReactWOW animation='bounceInRight' duration="2s">
                         <h2>Курси програмування</h2>
-                    </ReactWOW> 
+                    </ReactWOW>
+                    
+                </div>
+        }else{
+        return ( 
+           <div>
+               <div className="Block0">
+                    <h1 className='logo'>Study Link</h1>
+                    <br/><br/>
+                    <h2>Курси програмування</h2>
                 </div>
                 <div className='Block1'>
                     <ReactWOW animation='bounceInLeft' duration="2s">
@@ -64,9 +76,10 @@ class Landing extends Component {
                         </div>
                     </ReactWOW>
                 </div>
-               <img src={program} alt='program' width='100%'/>
+               <img src={program} alt='program' width='80%'/>
            </div>
         );
+        }
     }
 }
 

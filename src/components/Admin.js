@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs'; 
 import  '../componentsStyle/AdminStyle.css';
 import '../componentsStyle/LoaderStyle.css';
 
@@ -30,7 +32,8 @@ class Admin extends Component {
         const rootRef = firebase.database().ref();
         const schoolRef = rootRef.child('schools');
         const adminRef = rootRef.child('admin');
-        let dbinfo, admininfo;
+        const temesRef = rootRef.child('temes');
+        let dbinfo, admininfo, temesInfo;
         schoolRef.on('value', snap =>{
             dbinfo = snap.val();
             this.setState({
@@ -43,6 +46,13 @@ class Admin extends Component {
             //console.log(admininfo)
             this.setState({
                 adminPassword: admininfo.password
+            })
+        })
+        temesRef.on('value', snap =>{
+            temesInfo = snap.val();
+            //console.log(admininfo)
+            this.setState({
+                temes: temesInfo
             })
         })
         
@@ -147,52 +157,88 @@ class Admin extends Component {
             return (
                 <div>
                     <h1 className='ff-c'>Усі школи і гупи</h1>
-                    
-                    {
-                    this.state.schools.map(item =>(
-                    <div key={item.school}>
-                        <h1 className='blue ff-c'>{item.school}</h1>
-                        <div>
-                            {item.groups.map(item =>(
-                                <div key={item.name}>
-                                    <h3 align='left' className='gray ff-c ml-30 mt-20'>
-                                        <b>{item.name}</b> 	&nbsp;	&nbsp;
-                                        [{item.temes_pass} - занять
-                                        <button value={newschool+''+newgroup+''+item.temes_pass} onClick={this.addTemes}>+</button>
-                                        <button value={newschool+''+ newgroup+''+item.temes_pass} onClick={this.delTemes}>-</button>
-                                        ] (включно з пробним)
-                                    </h3>
-                                        <ListGroup horizontal >
-                                            <ListGroup.Item className='width-50'><b>№</b></ListGroup.Item>
-                                            <ListGroup.Item className='width-250'><b>Ім'я і Прізвище</b></ListGroup.Item>
-                                            <ListGroup.Item className='width-250'><b>Номер телефону(пароль)</b></ListGroup.Item>
-                                            <ListGroup.Item className='width-150'><b>Борг</b></ListGroup.Item>
-                                            <ListGroup.Item className='width-250'><b>Виписати борг</b></ListGroup.Item> 
-                                        </ListGroup>
-                                    {item.pupils.map(breakpoint => (
-                                        <ListGroup horizontal key={breakpoint.name}>
-                                            <ListGroup.Item className='width-50'>{i++}</ListGroup.Item>
-                                            <ListGroup.Item className='width-250'>{breakpoint.name}</ListGroup.Item>
-                                            <ListGroup.Item className='width-250'>{breakpoint.password}</ListGroup.Item>
-                                            <ListGroup.Item className='width-150'>
-                                                {(breakpoint.debt !== '') ? 
-                                                <span className='red'><b>{breakpoint.debt}</b></span> : 
-                                                <span className='green'><b>оплaчено</b></span>}
-                                            </ListGroup.Item>
-                                            <ListGroup.Item className='width-250'>
-                                                <input type='text' placeholder='сума боргу' className='width-100' onChange={this.addSum}/>
-                                                <button  value={newschool+''+ newgroup+''+i} onClick={this.addPay}>Додати</button>
-                                            </ListGroup.Item>
-                                        </ListGroup>
-                                    ))}
-                                    <div style={{visibility: 'hidden'}}>{i = 1} {newgroup++}</div>
-                                </div>
-                            ))}
+                    <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                        <Tab eventKey="home" title="Групи">
+
+                        {
+                        this.state.schools.map(item =>(
+                        <div key={item.school}>
+                            <h1 className='blue ff-c'>{item.school}</h1>
+                            <div>
+                                {item.groups.map(item =>(
+                                    <div key={item.name}>
+                                        <h3 align='left' className='gray ff-c ml-30 mt-20'>
+                                            <b>{item.name}</b> 	&nbsp;	&nbsp;
+                                            [{item.temes_pass} - занять
+                                            <button value={newschool+''+newgroup+''+item.temes_pass} onClick={this.addTemes}>+</button>
+                                            <button value={newschool+''+ newgroup+''+item.temes_pass} onClick={this.delTemes}>-</button>
+                                            ] (включно з пробним)
+                                        </h3>
+                                            <ListGroup horizontal >
+                                                <ListGroup.Item className='width-50'><b>№</b></ListGroup.Item>
+                                                <ListGroup.Item className='width-250'><b>Ім'я і Прізвище</b></ListGroup.Item>
+                                                <ListGroup.Item className='width-250'><b>Номер телефону(пароль)</b></ListGroup.Item>
+                                                <ListGroup.Item className='width-150'><b>Борг</b></ListGroup.Item>
+                                                <ListGroup.Item className='width-250'><b>Виписати борг</b></ListGroup.Item> 
+                                            </ListGroup>
+                                        {item.pupils.map(breakpoint => (
+                                            <ListGroup horizontal key={breakpoint.name}>
+                                                <ListGroup.Item className='width-50'>{i++}</ListGroup.Item>
+                                                <ListGroup.Item className='width-250'>{breakpoint.name}</ListGroup.Item>
+                                                <ListGroup.Item className='width-250'>{breakpoint.password}</ListGroup.Item>
+                                                <ListGroup.Item className='width-150'>
+                                                    {(breakpoint.debt !== '') ? 
+                                                    <span className='red'><b>{breakpoint.debt}</b></span> : 
+                                                    <span className='green'><b>оплaчено</b></span>}
+                                                </ListGroup.Item>
+                                                <ListGroup.Item className='width-250'>
+                                                    <input type='text' placeholder='сума боргу' className='width-100' onChange={this.addSum}/>
+                                                    <button  value={newschool+''+ newgroup+''+i} onClick={this.addPay}>Додати</button>
+                                                </ListGroup.Item>
+                                            </ListGroup>
+                                        ))}
+                                        <div style={{visibility: 'hidden'}}>{i = 1} {newgroup++}</div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div style={{visibility: 'hidden'}}>{newschool++}{newgroup = newschool - 1}</div>
                         </div>
-                        <div style={{visibility: 'hidden'}}>{newschool++}{newgroup = newschool - 1}</div>
-                    </div>
-                    ))
-                    }
+                        ))
+                        }
+
+                        </Tab>
+                        <Tab eventKey="profile" title="Теми">
+                            <h1>Теми курсу HTML/CSS</h1>
+                            <ListGroup horizontal >
+                                <ListGroup.Item className='width-50'><b>№</b></ListGroup.Item>
+                                <ListGroup.Item className='width-250'><b>Тема</b></ListGroup.Item>
+                                <ListGroup.Item className='width-250'><b>Редагувати</b></ListGroup.Item>
+                            </ListGroup>
+                            {this.state.temes.map((breakpoint, index) => (
+                                <ListGroup horizontal key={breakpoint.name}>
+                                    <ListGroup.Item className='width-50'>{index+1}</ListGroup.Item>
+                                    <ListGroup.Item className='width-250'>{breakpoint.tema}</ListGroup.Item>
+                                    <ListGroup.Item className='width-250'><button><b>Редагувати</b></button></ListGroup.Item>
+                                </ListGroup>
+                            ))}
+
+                            <label><b>Нaзва теми</b></label><br/>
+                            <input type="text" value="adad"/><br/><br/>
+
+                            <label><b>Посилання на Ютуб</b></label><br/>
+                            <input type="text" value="adad"/><br/><br/>
+
+                            <label><b>Посилання на Диск</b></label><br/>
+                            <input type="text" value="adad"/><br/><br/>
+
+                            <label><b>Посилання на github(зроблене завдання)</b></label><br/>
+                            <input type="text" value="adad"/><br/><br/>
+
+                            <button><b>Додати нову тему</b></button>
+                            {console.log(this.state.temes)}
+                        </Tab>
+                    </Tabs>
+                    
                     
                 </div>
             );

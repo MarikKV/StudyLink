@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from "react-bootstrap/Nav";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../componentsStyle/Header.css';
 
 class Header extends Component {
     constructor(props) {
@@ -36,6 +37,7 @@ class Header extends Component {
                 <Nav>        
                     <Nav.Link href="#/home">Головна</Nav.Link>
                     <Nav.Link href="#/temes">Навчання</Nav.Link>
+                    <Nav.Link href="#/stream"><span className='animation1'>Стрім(повторення)</span></Nav.Link>
                     <Nav.Link href="#/howtopay">Як оплатити?</Nav.Link>
                 </Nav>
             )
@@ -53,6 +55,7 @@ class Header extends Component {
                     <Nav.Link href="#/homeTeacher">Мої групи</Nav.Link>
                     <Nav.Link href="#/TeacherGroups">Додати/Видалити учня</Nav.Link>
                     <Nav.Link href="#/temes">Навчання</Nav.Link>
+                    <Nav.Link href="#/stream"><span className='animation1'>Стрім(повторення)</span></Nav.Link>
                 </Nav>
             )
         }
