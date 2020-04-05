@@ -141,9 +141,9 @@ class Admin extends Component {
         }
         if(this.state.loaded && this.state.passCheck===false){
             return (
-                <Form onSubmit={this.onSubmit} className='w-50'>
+                <Form onSubmit={this.onSubmit} className="w-50">
                     <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Введіть пароль адміна</Form.Label>
+                    <Form.Label >Введіть пароль адміна</Form.Label>
                     <Form.Control type="password" placeholder="Password" onChange={this.changePassword}/>
                     </Form.Group>
                    
@@ -157,7 +157,7 @@ class Admin extends Component {
             return (
                 <div>
                     <h1 className='ff-c'>Усі школи і гупи</h1>
-                    <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                    <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
                         <Tab eventKey="home" title="Групи">
 
                         {
@@ -207,7 +207,7 @@ class Admin extends Component {
                         }
 
                         </Tab>
-                        <Tab eventKey="profile" title="Теми">
+                        <Tab eventKey="temes" title="Теми">
                             <h1>Теми курсу HTML/CSS</h1>
                             <ListGroup horizontal >
                                 <ListGroup.Item className='width-50'><b>№</b></ListGroup.Item>
@@ -223,19 +223,46 @@ class Admin extends Component {
                             ))}
 
                             <label><b>Нaзва теми</b></label><br/>
-                            <input type="text" value="adad"/><br/><br/>
+                            <input type="text" value=""/><br/><br/>
 
                             <label><b>Посилання на Ютуб</b></label><br/>
-                            <input type="text" value="adad"/><br/><br/>
+                            <input type="text" value=""/><br/><br/>
 
                             <label><b>Посилання на Диск</b></label><br/>
-                            <input type="text" value="adad"/><br/><br/>
+                            <input type="text" value=""/><br/><br/>
 
                             <label><b>Посилання на github(зроблене завдання)</b></label><br/>
-                            <input type="text" value="adad"/><br/><br/>
+                            <input type="text" value=""/><br/><br/>
 
                             <button><b>Додати нову тему</b></button>
                             {console.log(this.state.temes)}
+                        </Tab>
+                        <Tab eventKey="newschool" title="Додати новий заклад/групу">
+                            <br/>
+                            <h5 className="header-back">Адмін може додати новий заклад і групи у ньому, а також пароль для викладача якй вестиме заняття<br/>
+                                    Назви груп будуть додаватись автоматично.<br/>
+                                    Вчитель зможе добавляти учнів зі свого акаунту.
+                            </h5>
+
+                            <div className="w-60 fl">
+                                <h5>Інформація/редагування існуючих закладів</h5>
+
+                                <ListGroup horizontal >
+                                    <ListGroup.Item><b>Назва закладу</b></ListGroup.Item>
+                                    <ListGroup.Item><b>Кількість груп субота</b></ListGroup.Item>
+                                    <ListGroup.Item><b>Кількість груп неділя</b></ListGroup.Item>
+                                    <ListGroup.Item><b>Додати групу субота</b></ListGroup.Item>
+                                    <ListGroup.Item><b>Додати групу на неділя</b></ListGroup.Item>
+                                </ListGroup>
+                            </div>
+                            <div className="w-40 fl">
+                                <h5>Додати новий заклад</h5>
+                                
+                                <label><b>Нaзва нового закладу</b></label><br/>
+                                <input type="text" value=""/><br/><br/>
+
+                                <button><b>Додати</b></button>
+                            </div>
                         </Tab>
                     </Tabs>
                     

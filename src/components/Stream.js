@@ -99,8 +99,23 @@ class Stream extends Component {
                     
                     
                     <h4>Бажаємо вам міцного здоров'я! </h4>
+
+
                     <br/><br/><br/>
-                    <h5>Посилання на стрім буде <a href={this.state.streamUrl}>тут</a></h5>
+                    <h3>Стрім №1 (Теми 1-13)</h3>
+                    <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/kuiZLS-8Rjo" frameborder="0" 
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
+                    <br/><br/>
+                    <h3>Стрім №2 (Теми 14-...)</h3>
+                    <br/><br/>
+                    <iframe width="560" height="315" 
+                        src="https://www.youtube.com/embed/fE7lYl2NRcE?start=530" 
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+
+                     </iframe>
                 </div>
             )
         } 

@@ -127,6 +127,7 @@ class HomeTeacher extends Component {
                 <div>
                     <h1>Hello teacher {this.state.user.name}! Учнів у закладі - {this.state.pupilsNum}</h1>
                     <h2>Пройдені теми по групам</h2>
+                    <div className='center'>
                     <ListGroup horizontal >
                         <ListGroup.Item className='width-250'><b>Назва групи</b></ListGroup.Item>
                         <ListGroup.Item className='width-250'><b>Кількість учнів</b></ListGroup.Item>
@@ -145,6 +146,9 @@ class HomeTeacher extends Component {
                         </ListGroup>
                     ))
                     }
+                    </div>
+                    <br/><br/><br/>
+                    <h2>У планах</h2>
                     <h2>Оцінки</h2>
                     <Accordion defaultActiveKey="0" align='left'>
                     {this.state.groups.map(item=>(
@@ -177,7 +181,7 @@ class HomeTeacher extends Component {
                     } 
                     </Accordion>
                     
-                    <h2>Внести оплату</h2>
+                    <h2>Внести заборгованість</h2>
 
                     <Accordion defaultActiveKey="0" align='left'>
                     {this.state.groups.map(item=>(
