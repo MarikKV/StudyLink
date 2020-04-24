@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "14a1f333cbbfb53df664a37d2468ee50",
+    "revision": "dc6fffec3386e4cb5fec451cc8ac9d6a",
     "url": "/StudyLink/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/StudyLink/static/css/2.47e06e2e.chunk.css"
   },
   {
-    "revision": "529648b8e198daacb50c",
-    "url": "/StudyLink/static/css/main.ff94c710.chunk.css"
+    "revision": "3b9a247e139a23e6ff70",
+    "url": "/StudyLink/static/css/main.42aa60a8.chunk.css"
   },
   {
     "revision": "50ce01bda8034d95c56d",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/StudyLink/static/js/2.f491df5a.chunk.js.LICENSE"
   },
   {
-    "revision": "529648b8e198daacb50c",
-    "url": "/StudyLink/static/js/main.b0c1f4e3.chunk.js"
+    "revision": "3b9a247e139a23e6ff70",
+    "url": "/StudyLink/static/js/main.64043fc8.chunk.js"
   },
   {
     "revision": "3d138def5e8efe2d8a3b",
