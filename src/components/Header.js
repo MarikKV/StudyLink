@@ -37,7 +37,8 @@ class Header extends Component {
                 <Nav>        
                     <Nav.Link href="#/home">Головна</Nav.Link>
                     <Nav.Link href="#/temes">Навчання</Nav.Link>
-                    <Nav.Link href="#/stream"><span className='animation1'>Стрім(повторення)</span></Nav.Link>
+                    <Nav.Link href="#/online">Онлайн навчання</Nav.Link>
+                    <Nav.Link href="#/stream">Стрім(повторення)</Nav.Link>
                     <Nav.Link href="#/howtopay">Як оплатити?</Nav.Link>
                 </Nav>
             )

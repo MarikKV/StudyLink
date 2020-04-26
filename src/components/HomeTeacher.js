@@ -32,6 +32,9 @@ class HomeTeacher extends Component {
                 schoolsInfo: schoolsInfo,
                 user: user
             })
+            
+        })
+        setTimeout(()=>{
             this.state.schoolsInfo.map(item=>{
                 if(item.school === user.school){
                     item.groups.map(item=>{
@@ -41,15 +44,14 @@ class HomeTeacher extends Component {
                         groups: item.groups,
                         pupilsNum: allPupilsNum
                     })
-                    allPupilsNum = 0;
+                    console.log('пагналі')
+                    /*allPupilsNum = 0;*/
                 }
             })
-        })
-        setTimeout(()=>{
             this.setState({
-            user: user,
-            loaded: true
-        })
+                loaded: true
+            })
+            console.log(this.state.groups)
         }, 1500)
     }
     addTeme(e){

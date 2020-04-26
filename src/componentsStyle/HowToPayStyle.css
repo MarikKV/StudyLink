@@ -1,0 +1,38 @@
+.padd{
+    padding: 0 15px;
+}
+.QR-block{
+    background-color: rgb(209, 209, 212);
+    min-height: 350px;
+    border-radius: 10px;
+}
+.bank-block{
+    background-color: rgb(209, 209, 212);
+    min-height: 120px;
+    border-radius: 10px;
+}
+.comis-block{
+    background-color: rgb(209, 209, 212);
+    min-height: 80px;
+    border-radius: 10px;
+}
+.QR-text{
+    margin-top: 110px;
+    font-size: 22pt;
+}
+.bank-text{
+    font-size: 20pt;
+}
+.go{
+    background-color: rgb(87, 141, 51);
+    color: white;
+    border-radius: 8px;
+    padding: 0 8px;
+}
+h3{
+    margin: 20px 0;
+    padding: 0 30px;
+}
+.red{
+    color: red
+}

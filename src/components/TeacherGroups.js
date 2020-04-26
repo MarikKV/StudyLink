@@ -40,6 +40,9 @@ class TeacherGroups extends Component {
                 schoolsInfo: schoolsInfo,
                 user: user
             })
+            
+        })
+        setTimeout(()=>{
             this.state.schoolsInfo.map(item=>{
                 if(item.school === user.school){
                     item.groups.map(item=>{
@@ -52,8 +55,6 @@ class TeacherGroups extends Component {
                     allPupilsNum = 0;
                 }
             })
-        })
-        setTimeout(()=>{
             this.setState({
             user: user,
             loaded: true

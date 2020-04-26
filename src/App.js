@@ -10,6 +10,7 @@ import Landing from './components/Landing';
 import Temes from './components/Temes';
 import HowToPay from './components/HowToPay';
 import Stream from './components/Stream';
+import Online from './components/Online';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -67,6 +68,8 @@ class App extends Component {
                   <Route exact path='/howtopay' component={HowToPay}/>
 
                   <Route exact path='/stream' component={Stream}/>
+
+                  <Route exact path='/online' component={Online}/>
 
                   <Route exact path='/admin' component={Admin}/>
 

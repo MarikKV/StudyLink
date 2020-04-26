@@ -94,15 +94,22 @@ class Home extends Component {
                         <h2>Вітаю {this.state.username}!</h2>
                         <h3>Ви проходите курс HTML/CSS у групі {this.state.userGroup}.</h3>
                             <h3>
-                                {(this.state.userGroup[6] === 's') ? <span>Неділя </span>: <span>Субота </span>}
-                                {(this.state.userGroup[5] === '1') ? <span> 10:00</span>: ''}
-                                {(this.state.userGroup[5] === '2') ? <span> 12:00</span>: ''}
-                                {(this.state.userGroup[5] === '3') ? <span> 14:00</span>: ''}
-                                {(this.state.userGroup[5] === '4') ? <span> 16:00</span>: ''}
-                            </h3>
-                        <h3>Відбулось {this.state.temesPass} занять</h3>
-                    </div>
+                                {(this.state.userGroup[6] === 's') ? <span>Неділя </span>: ''}
+                                {(this.state.userGroup[6] === 'f') ? <span>П'ятниця </span>: ''}
+                                {(this.state.userGroup[6] === null) ? <span>Субота </span>: ''}
+                                {(this.state.userGroup[5] === '1' && this.state.userGroup[6] !== 'f') ? <span> 10:00</span>: ''}
+                                {(this.state.userGroup[5] === '2' && this.state.userGroup[6] !== 'f') ? <span> 12:00</span>: ''}
+                                {(this.state.userGroup[5] === '3' && this.state.userGroup[6] !== 'f') ? <span> 14:00</span>: ''}
+                                {(this.state.userGroup[5] === '4' && this.state.userGroup[6] !== 'f') ? <span> 16:00</span>: ''}
 
+                                {(this.state.userGroup[5] === '1' && this.state.userGroup[6] === 'f') ? <span> 16:30</span>: ''}
+                                {(this.state.userGroup[5] === '2' && this.state.userGroup[6] === 'f') ? <span> 18:30</span>: ''}
+                            </h3>
+                        {/*<h3>Відбулось {this.state.temesPass} занять</h3>*/}
+
+                        <h3 className="red">У звязку з карантином заняття відбуваються онлайн.<br/> Детельніше про навчання онлан можна дізнатись натиснувши вкладку "Онлайн навчання" зверху.</h3>
+                    </div>
+                    {/*
                     <h2 className='headerInfoGroups'>Інформація про групи у закладі {this.state.userSchool}</h2>
                     <div align='center' className='allGroups'>
                         { this.state.allTemsPased.map(item=>(
@@ -140,10 +147,10 @@ class Home extends Component {
                                 ))
                             }
                         </div>
-                        {/*<h3>Оплачено {Math.ceil(this.state.temesPass/4)*4} занять</h3>
+                        <h3>Оплачено {Math.ceil(this.state.temesPass/4)*4} занять</h3>
                         <h3>Наступна оплата через {Math.ceil(this.state.temesPass/4)*4 - this.state.temesPass} заняття</h3>
-                        {debtInfo}*/}
-                    </div>) : <div></div>}
+                        {debtInfo}
+                    </div>) : <div></div>}*/}
                 </div>
             )
         } 

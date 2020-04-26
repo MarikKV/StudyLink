@@ -18,7 +18,10 @@ class Admin extends Component {
             schools: null,
             passCheck: false,
             password: null,
-            debtSum: ''
+            debtSum: '',
+            newSchoolName: null,
+            newGroupeName: "Надія",
+            newDay: "П'ятниця"
         }
 
         this.addTemes = this.addTemes.bind(this)
@@ -27,6 +30,14 @@ class Admin extends Component {
         this.addPay = this.addPay.bind(this)     
         this.onSubmit = this.onSubmit.bind(this) 
         this.changePassword = this.changePassword.bind(this) 
+        
+        this.newSchool = this.newSchool.bind(this) 
+        this.addNewSchool = this.addNewSchool.bind(this) 
+        
+        this.newGroupe = this.newGroupe.bind(this) 
+        this.addNewGroupe = this.addNewGroupe.bind(this) 
+
+        this.newDay = this.newDay.bind(this) 
     }
     componentDidMount() {
         const rootRef = firebase.database().ref();
@@ -133,6 +144,110 @@ class Admin extends Component {
             password: e.target.value
         })
     }
+    newSchool(e){
+        this.setState({
+            newSchoolName: e.target.value
+        })
+    }
+    addNewSchool(){
+        let newSchoolId = 1;
+        let canBeAdded = true;
+        let link = 'schools/'+newSchoolId;
+        console.log(link, this.state.newSchoolName);
+        for(let i=0; i<this.state.schools.length; i++){
+            if(this.state.schools[i].school === this.state.newSchoolName){
+                canBeAdded = false
+            }
+        }
+        if(this.state.newSchoolName !== '' && canBeAdded){
+        firebase.database().ref(link).update({
+            groups:{'0':{
+                        name:'newSchool', 
+                        pupils:{'0':{
+                            debt:'',
+                            name: 'test', 
+                            password: 'test', 
+                            phone:'test'
+                        }
+                        },
+                        temes_open: 1, 
+                        temes_pass: 1
+                    }
+                },
+            school: this.state.newSchoolName,
+        })}
+    }
+    newGroupe(e){
+        this.setState({
+            newGroupeName: e.target.value
+        })
+        console.log(this.state.newGroupeName)
+    }
+    addNewGroupe(){
+        const rootRef = firebase.database().ref();
+        const schoolRef = rootRef.child('schools');
+        let dbinfo, schoolIndex, newGName, day, dayf=0, days=0, dayss=0, currentDay;
+        schoolRef.on('value', snap =>{
+            dbinfo = snap.val();
+            this.setState({
+                schools: dbinfo
+            })
+        })
+        for(let i = 0; i < this.state.schools.length; i++){
+            if(this.state.schools[i].school === this.state.newGroupeName){
+                schoolIndex = i;
+            }
+        }
+        
+        for(let j = 0; j < this.state.schools[schoolIndex].groups.length; j++){
+            if(this.state.schools[schoolIndex].groups[j].name.length === 6){
+                dayss++
+            }
+            if(this.state.schools[schoolIndex].groups[j].name.length === 7 &&
+                this.state.schools[schoolIndex].groups[j].name[6] === 'f'
+                ){
+                dayf++
+            }
+            if(this.state.schools[schoolIndex].groups[j].name.length === 7 &&
+                this.state.schools[schoolIndex].groups[j].name[6] === 's'
+                ){
+                days++
+            }
+            if(this.state.newDay === "П'ятниця"){
+                day = 'f';
+                currentDay=dayf
+            }
+            if(this.state.newDay === "Субота"){
+                day = '';
+                currentDay=dayss
+            }
+            if(this.state.newDay === "Неділя"){
+                day = 's';
+                currentDay=days
+            }
+        }
+        newGName = 'SL-10'+(currentDay+1)+day;
+        let link = 'schools/'+schoolIndex+'/groups/'+(currentDay);
+        console.log(link)
+        firebase.database().ref(link).update({
+            name: newGName, 
+            pupils:{'0':{
+                debt:'',
+                name: 'test', 
+                password: 'test', 
+                phone:'test'
+            }
+            },
+            temes_open: 1, 
+            temes_pass: 1
+        })
+    }
+    newDay(e){
+        this.setState({
+            newDay: e.target.value
+        })
+        console.log(this.state.newDay)
+    }
     
     render() {
         let i = 1, newschool = 0, newgroup = 0;
@@ -215,13 +330,13 @@ class Admin extends Component {
                                 <ListGroup.Item className='width-250'><b>Редагувати</b></ListGroup.Item>
                             </ListGroup>
                             {this.state.temes.map((breakpoint, index) => (
-                                <ListGroup horizontal key={breakpoint.name}>
+                                <ListGroup horizontal key={index}>
                                     <ListGroup.Item className='width-50'>{index+1}</ListGroup.Item>
                                     <ListGroup.Item className='width-250'>{breakpoint.tema}</ListGroup.Item>
                                     <ListGroup.Item className='width-250'><button><b>Редагувати</b></button></ListGroup.Item>
                                 </ListGroup>
                             ))}
-
+                            {/*
                             <label><b>Нaзва теми</b></label><br/>
                             <input type="text" value=""/><br/><br/>
 
@@ -235,7 +350,7 @@ class Admin extends Component {
                             <input type="text" value=""/><br/><br/>
 
                             <button><b>Додати нову тему</b></button>
-                            {console.log(this.state.temes)}
+                            */}
                         </Tab>
                         <Tab eventKey="newschool" title="Додати новий заклад/групу">
                             <br/>
@@ -247,7 +362,7 @@ class Admin extends Component {
                             <div className="w-60 fl">
                                 <h5>Інформація/редагування існуючих закладів</h5>
 
-                                <ListGroup horizontal >
+                                <ListGroup horizontal key='one'>
                                     <ListGroup.Item><b>Назва закладу</b></ListGroup.Item>
                                     <ListGroup.Item><b>Кількість груп субота</b></ListGroup.Item>
                                     <ListGroup.Item><b>Кількість груп неділя</b></ListGroup.Item>
@@ -259,9 +374,25 @@ class Admin extends Component {
                                 <h5>Додати новий заклад</h5>
                                 
                                 <label><b>Нaзва нового закладу</b></label><br/>
-                                <input type="text" value=""/><br/><br/>
+                                <input type="text" onChange={this.newSchool}/>
+                                <button onClick={this.addNewSchool}>Додати</button>
+                                <br/><br/>
 
-                                <button><b>Додати</b></button>
+                                <h5>Додати нову групу у заклад</h5>
+
+                                <label><b>День занять</b></label><br/>
+                                <select onChange={this.newGroupe}>
+                                    {this.state.schools.map((schools, index)=>(
+                                            <option key={index}>{schools.school}</option>
+                                        ))
+                                    }
+                                </select>
+                                <select onChange={this.newDay}>
+                                    <option>П'ятниця</option>
+                                    <option>Субота</option>
+                                    <option>Неділя</option>
+                                </select>
+                                <button onClick={this.addNewGroupe}><b>Додати</b></button>
                             </div>
                         </Tab>
                     </Tabs>

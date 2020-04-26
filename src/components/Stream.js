@@ -103,14 +103,14 @@ class Stream extends Component {
 
                     <br/><br/><br/>
                     <h3>Стрім №1 (Теми 1-13)</h3>
-                    <iframe width="560" height="315" 
+                    <iframe title="video1" width="560" height="315" 
                     src="https://www.youtube.com/embed/kuiZLS-8Rjo" frameborder="0" 
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen></iframe>
                     <br/><br/>
                     <h3>Стрім №2 (Теми 14-...)</h3>
                     <br/><br/>
-                    <iframe width="560" height="315" 
+                    <iframe title="video2" width="560" height="315" 
                         src="https://www.youtube.com/embed/fE7lYl2NRcE?start=530" 
                         frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
