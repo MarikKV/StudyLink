@@ -46,7 +46,7 @@
     font-size: 40px;
     font-family: fantasy;
     background-color: rgb(72, 62, 78);
-    height: 240px;
+    height: 270px;
     color: white;
 }
 @media (max-width: 1245px) {
@@ -54,13 +54,31 @@
         height: 400px;
     }
 }
-@media (max-width: 600px) {
+@media (max-width: 710px) {
     .bg1, .bg2{
-        height: 600px;
+        font-size: 28px;
+        height: 500px;
+    }
+    .bg3{
+        font-size: 28px;
     }
     .bg4{
         height: 400px;
     }
+    .w-50{
+        width: 500px;
+    }
+}
+@media (max-width: 600px) {
+    .bg1, .bg2{
+        height: 500px;
+    }
+    .bg4{
+        font-size: 28px;
+        height: 350px;
+    }
+    .bg4 h1{font-size: 28px;}
+    .bg4 h3{font-size: 24px;}
     .w-50{
         width: 500px;
     }
@@ -76,4 +94,13 @@
 }
 .git{
     color:  rgb(43, 16, 25);
+}
+.footer{
+    padding: 20px 30px;
+    background: black;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
 }
