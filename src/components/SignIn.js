@@ -93,7 +93,7 @@ class SignIn extends Component {
         const teacherRef = rootRef.child('teachers');
         let dbinfo, dbinfoteacher;
         let userInfo={}; 
-        
+        console.log(this.state.phone, this.state.password)
         if(this.state.status === 'Учень'){
         schoolRef.on('value', snap => {
             dbinfo = snap.val();
@@ -102,7 +102,8 @@ class SignIn extends Component {
                     item.groups.map(item=>{
                         if(item.name === this.state.group){
                             item.pupils.map(item=>{
-                                if(this.state.phone === item.phone && this.state.password === item.password){
+                                //console.log("user",item.phone, item.password)
+                                if(this.state.phone === item.password && this.state.password === item.phone){
                                     //console.log('loged', item); записуємо учня у локалстор
                                     userInfo.name = item.name;
                                     userInfo.school = this.state.school;

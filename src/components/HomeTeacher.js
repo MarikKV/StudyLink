@@ -19,11 +19,37 @@ class HomeTeacher extends Component {
         }
         this.addTeme = this.addTeme.bind(this)
         this.delTeme = this.delTeme.bind(this)
+        this.updateTemes = this.updateTemes.bind(this)
+        this.changeNumberOfTemes = this.changeNumberOfTemes.bind(this)
+    }
+    updateTemes(){
+        console.log("updateTemes");
+        setTimeout(()=>{
+                const rootRef = firebase.database().ref();
+                const schoolRef = rootRef.child('schools');
+                let schoolsInfo;
+                schoolRef.on('value', snap =>{
+                    schoolsInfo = snap.val()
+                    //console.log(schoolsInfo)
+                    this.setState({
+                        schoolsInfo: schoolsInfo,
+                    })
+                })
+                this.state.schoolsInfo.map(item=>{
+                    if(item.school === this.state.user.school){
+                        this.setState({
+                            groups: item.groups,
+                        })
+                        console.log('updated')
+                    }
+                })
+            }, 100) 
     }
     componentDidMount() {
         const rootRef = firebase.database().ref();
         const schoolRef = rootRef.child('schools');
         let user = JSON.parse(localStorage.getItem('studyLinkuser'));
+        this.state.user = user;
         let schoolsInfo, allPupilsNum = 0;
         schoolRef.on('value', snap =>{
             schoolsInfo = snap.val()
@@ -32,7 +58,6 @@ class HomeTeacher extends Component {
                 schoolsInfo: schoolsInfo,
                 user: user
             })
-            
         })
         setTimeout(()=>{
             this.state.schoolsInfo.map(item=>{
@@ -44,8 +69,7 @@ class HomeTeacher extends Component {
                         groups: item.groups,
                         pupilsNum: allPupilsNum
                     })
-                    console.log('пагналі')
-                    /*allPupilsNum = 0;*/
+                    allPupilsNum = 0;
                 }
             })
             this.setState({
@@ -54,9 +78,13 @@ class HomeTeacher extends Component {
             console.log(this.state.groups)
         }, 1500)
     }
-    addTeme(e){
-        let x = e.target.value;
-        //console.log('add teme',this.state.user.school, x);
+    changeNumberOfTemes(num, action){
+        if(action === false){
+            action = -1;
+        }
+        if(action === true){
+            action = 1;
+        }
         const rootRef = firebase.database().ref();
         const schoolRef = rootRef.child('schools');
         let dbinfo, i = 0, j = 0, schoolId, groupId, temesPass;
@@ -72,9 +100,9 @@ class HomeTeacher extends Component {
                 if(item.school === this.state.user.school){
                     schoolId = i;
                     item.groups.map(item=>{
-                        if(item.name === x){
+                        if(item.name === num){
                             groupId = j;
-                            temesPass = item.temes_pass + 1;
+                            temesPass = item.temes_pass + action;
                             let link = 'schools/'+schoolId+'/groups/'+groupId;
                             console.log(link)
                             firebase.database().ref(link).update({
@@ -85,40 +113,17 @@ class HomeTeacher extends Component {
                     })
                 }
                 i++
-            })}, 300)
+            })   
+            this.updateTemes()
+        }, 300)
+    }
+    addTeme(e){
+        let num = e.target.value;
+        this.changeNumberOfTemes(num, true)
     }
     delTeme(e){
-        let x = e.target.value;
-        //console.log('add teme',this.state.user.school, x);
-        const rootRef = firebase.database().ref();
-        const schoolRef = rootRef.child('schools');
-        let dbinfo, i = 0, j = 0, schoolId, groupId, temesPass;
-        schoolRef.on('value', snap =>{
-            dbinfo = snap.val();
-            this.setState({
-                school: dbinfo
-            })
-        })
-        setTimeout(()=>{
-            dbinfo.map(item=>{
-                console.log(item)
-                if(item.school === this.state.user.school){
-                    schoolId = i;
-                    item.groups.map(item=>{
-                        if(item.name === x){
-                            groupId = j;
-                            temesPass = item.temes_pass - 1;
-                            let link = 'schools/'+schoolId+'/groups/'+groupId;
-                            console.log(link)
-                            firebase.database().ref(link).update({
-                                temes_pass: temesPass
-                            })
-                        }
-                        j++
-                    })
-                }
-                i++
-            })}, 300)
+        let num = e.target.value;
+        this.changeNumberOfTemes(num, false) 
     }
     render(){
         if(!this.state.loaded){
